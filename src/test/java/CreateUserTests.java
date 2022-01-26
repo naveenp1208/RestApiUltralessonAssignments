@@ -1,35 +1,40 @@
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import users.UsersClient;
 
-import static io.restassured.RestAssured.given;
+import java.util.UUID;
 
 public class CreateUserTests {
+
+    private UsersClient usersClient;
+
+    @BeforeClass
+    public void beforeClass() {
+        usersClient = new UsersClient();
+    }
 
     @Test
     public void shouldCreateMaleUser() {
 
-
-
         // 1. Arrange
-        String body = "{\n" +
+        String email = String.format("%s@gmail.com", UUID.randomUUID());
+        String body = String.format("{\n" +
                 "  \"name\": \"Tenali Ramakrishna\",\n" +
                 "  \"gender\": \"male\",\n" +
-                "  \"email\": \"tenali.ramakrishna16@gmail.com\",\n" +
+                "  \"email\": \"%s\",\n" +
                 "  \"status\": \"active\"\n" +
-                "}";
+                "}",email);
 
         // 2. Act
-       new UsersClient().createUser(body)
+       usersClient.createUser(body)
                 .then()
                 .log().body()
 
         // 3. Assert
                 .statusCode(201)
                 .body("data.id", Matchers.notNullValue())
-                .body("data.email", Matchers.equalTo("tenali.ramakrishna16@gmail.com"));
+                .body("data.email", Matchers.equalTo(email));
 
 
 
@@ -43,22 +48,24 @@ public class CreateUserTests {
 
 
         // 1. Arrange
-        String body = "{\n" +
+
+        String email = String.format("%s@gmail.com", UUID.randomUUID());
+        String body = String.format("{\n" +
                 "  \"name\": \"Anushka\",\n" +
                 "  \"gender\": \"female\",\n" +
-                "  \"email\": \"Anushka.sheety15@gmail.com\",\n" +
+                "  \"email\": \"%s\",\n" +
                 "  \"status\": \"active\"\n" +
-                "}";
+                "}",email);
 
         // 2. Act
-      new UsersClient().createUser(body)
+      usersClient.createUser(body)
                 .then()
                 .log().body()
 
         // 3. Assert
                 .statusCode(201)
                 .body("data.id", Matchers.notNullValue())
-                .body("data.email", Matchers.equalTo("Anushka.sheety15@gmail.com"));
+                .body("data.email", Matchers.equalTo(email));
     }
 
 
