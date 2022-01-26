@@ -38,7 +38,7 @@ public class Sampletest {
                         .body("{\n" +
                                 "  \"name\": \"Tenali Ramakrishna\",\n" +
                                 "  \"gender\": \"male\",\n" +
-                                "  \"email\": \"tenali.ramakrishna21@gmail.com\",\n" +
+                                "  \"email\": \"tenali.ramakrishna41@gmail.com\",\n" +
                                 "  \"status\": \"active\"\n" +
                                 "}")
                 .when()
@@ -47,7 +47,7 @@ public class Sampletest {
                      .log().body()
                      .statusCode(201)
                 .body("data.id", Matchers.notNullValue())
-                .body("data.email", Matchers.equalTo("tenali.ramakrishna21@gmail.com"));
+                .body("data.email", Matchers.equalTo("tenali.ramakrishna41@gmail.com"));
         ;
 
 
