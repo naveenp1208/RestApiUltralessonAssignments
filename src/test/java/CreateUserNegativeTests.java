@@ -10,7 +10,7 @@ public class CreateUserNegativeTests {
 
     @BeforeClass
     public void beforeClass(){
-            usersClient = new UsersClient();
+        usersClient = new UsersClient();
     }
 
     @Test
@@ -20,9 +20,14 @@ public class CreateUserNegativeTests {
         String gender = "female";
         String email = "Anushka.sheetygmail.com";
         String status = "active";
-        CreateUserRequestBody requestBody = new CreateUserRequestBody(name, gender, email, status);
+        CreateUserRequestBody requestBody = CreateUserRequestBody.builder()
+                .name(name).gender(gender)
+                .email(email).status(status).build();
+
+
+
         // 2. Act
-       usersClient.createUser(requestBody)
+        usersClient.createUser(requestBody)
                 .then()
                 .log().body()
 

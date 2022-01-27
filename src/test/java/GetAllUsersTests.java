@@ -17,15 +17,15 @@ public class GetAllUsersTests {
 
 
 
-       //Act
-       usersClient
-               .getAllUsers()
-                   .then()
-       //Assert
-                       .statusCode(200)
-                       .body("data", Matchers.hasSize(20))
-                       .body("data", Matchers.hasItem(Matchers.hasEntry("gender", "male")))
-                       .log().body();
+        //Act
+        usersClient
+                .getAllUsers()
+                .then()
+                //Assert
+                .statusCode(200)
+                .body("data", Matchers.hasSize(20))
+                .body("data", Matchers.hasItem(Matchers.hasEntry("gender", "male")))
+                .log().body();
 
 
     }
